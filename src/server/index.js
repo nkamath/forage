@@ -1,9 +1,24 @@
-const express = require('express');
-const os = require('os');
+const app = require("./app");
+const http = require("http");
+const port = normalizePort(process.env.PORT || "8080");
+app.set("port", port);
 
-const app = express();
+const server = http.createServer(app);
 
-app.use(express.static('dist'));
-app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
+server.listen(port);
 
-app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
+function normalizePort(val) {
+    const port = parseInt(val, 10);
+    if (isNaN(port)) {
+      return val;
+    }
+    if (port >= 0) {
+      return port;
+    }
+    return false;
+  }
+ 
+
+server.on("listening", () => {
+    console.log(`server is listening for requests on port ${server.address().port}`);
+});
