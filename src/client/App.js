@@ -15,17 +15,21 @@ export default class App extends Component {
 
   render() {
     return (
-      <Container id="app-container">
-        <Nav>
-            <Link to='/'>Landing</Link>
+      <div>
+        <Nav className="justify-content-end" variant="tabs" defaultActiveKey="/">
+          <Nav.Item>
+            <Nav.Link href='/'>Landing</Nav.Link>
+          </Nav.Item>
         </Nav>
-        <Row>
-          <h1>Forage</h1>
-        </Row>
-        <main>
-          <Route exact path="/" component={Landing} />
-        </main>
-      </Container>
+        <Container id="app-container">
+          <Row>
+            <h1>Forage</h1>
+          </Row>
+          <main>
+            <Landing/>
+          </main>
+        </Container>
+      </div>
     );
   }
 }
